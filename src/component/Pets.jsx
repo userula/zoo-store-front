@@ -11,7 +11,7 @@ const Pets = () => {
     useEffect(() => {
         const getPets = async () => {
             setLoading(true);
-            const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/pet/");
+            const response = await fetch("https://628e40fca339dfef87aab9d6.mockapi.io/api/v1/pets/1");
             if(componentMounted){
                 setData(await response.clone().json());
                 setFilter(await response.json());

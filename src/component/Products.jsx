@@ -11,7 +11,7 @@ const Products = () => {
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
-            const response = await fetch("http://localhost:3000/goods");
+            const response = await fetch("https://628e40fca339dfef87aab9d6.mockapi.io/api/v1/products/1");
             if(componentMounted){
                 setData(await response.clone().json());
                 setFilter(await response.json());
