@@ -36,6 +36,7 @@
 }
 #group2{
     background-color: grey;
+    color: #FFFFFF;
 }
 
 #h1{
@@ -127,7 +128,7 @@
 
 .full{
 
-    background-image: url("C:\Users\ulanb\WebstormProjects\zoo-store-front\public\assets\bg_nav.jpg");
+    background-image: url("/public/assets/bg_nav.jpg");
 }
 
 .mainpage{
@@ -135,7 +136,7 @@
 }
 
 .showPage{
-    height: 70vh;
+    height: 75vh;
 }
 
 .fa{

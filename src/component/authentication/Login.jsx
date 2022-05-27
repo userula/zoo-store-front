@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import '../../css/login.css';
 import $ from 'jquery';
+// import 'font-awesome';
 
 let readerView = false;
 
@@ -8,7 +9,7 @@ let readerView = false;
 const openG1 = () => {
     if(readerView === true)
     {
-        $('#group1').css('background-color', 'violet');
+        $('#group1').css('background-color', 'aliceblue');
         $('#group2').css('background-color', 'grey');
         $('.signup').slideToggle();
         $('.login').slideToggle();
@@ -19,8 +20,9 @@ const openG1 = () => {
 const openG2 = () => {
     if(readerView === false)
     {
-        $('#group2').css('background-color', 'violet');
+        $('#group2').css('background-color', 'aliceblue');
         $('#group1').css('background-color', 'grey');
+        $('#group1').css('color', '#673FD7');
         $('.signup').slideToggle();
         $('.login').slideToggle();
         readerView = true;
@@ -30,6 +32,7 @@ const openG2 = () => {
 const Login = () => {
 
     return (
+        <>
         <div className="full">
             <div className="h-50">
                 <h1>Hello</h1>
@@ -117,6 +120,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+        </>
 );
 }
 
