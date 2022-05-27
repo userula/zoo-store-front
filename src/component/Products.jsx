@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Skeleton from "react-loading-skeleton";
+import {NavLink} from "react-router-dom";
+import ReactLoading from "react-loading";
 
 const Products = () => {
 
@@ -11,7 +12,7 @@ const Products = () => {
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
-            const response = await fetch("https://628e40fca339dfef87aab9d6.mockapi.io/api/v1/products/1");
+            const response = await fetch("http://localhost:3000/goods");
             if(componentMounted){
                 setData(await response.clone().json());
                 setFilter(await response.json());
@@ -28,24 +29,17 @@ const Products = () => {
     const Loading = () => {
         return(
             <>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
+                <div className="col-md-12 loading">
+                    <ReactLoading type={'spinningBubbles'} color="#57419D"
+                                  height={467} width={175} className="m-auto pt-lg-5"/>
+                    <br/><br/><br/>
                 </div>
             </>
         )
     }
 
     const filterProduct = (cat) => {
-        const updateList = data.filter((x)=>x.category === cat);
+        const updateList = data.filter((x)=>x.category_id === cat);
         setFilter(updateList);
     }
 
@@ -54,29 +48,35 @@ const Products = () => {
             <>
                 <div className="buttons d-flex justify-content-center mb-5 pb-5">
                     <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(data)}>All</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('sweets')}>Sweets</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('accessories')}>Accessories</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('clothes')}>Clothes</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('other')}>Other</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('1')}>Sweets</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('2')}>Accessories</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('3')}>Clothes</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('4')}>Other</button>
 
                 </div>
                 {filter.map((product)=>{
                     return (
                         <>
                             <div className="col-md-3 product">
+
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={product.id}>
-                                    <img src={product.photo} className="card-img-top" alt={product.name} height="250px"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title mb-0">{product.name}</h5>
-                                        <p className="card-text lead fw-bold text-dark">${product.price}</p>
-                                        <p className="card-text">{product.description.substring(0, 100)}...</p>
-                                        <a href="/addtocart" className="text-white text-decoration-none">
-                                            <button className="addtocart">
-                                                Add to cart
-                                            </button>
-                                        </a>
-                                    </div>
+                                    <NavLink to={`/products/${product.id}`} className="text-decoration-none">
+                                        <img src={product.photo} className="card-img-top" alt={product.name} height="250px"/>
+                                        <div className="card-body">
+                                            <h5 className="card-title mb-0">{product.name}</h5>
+                                            <p className="card-text lead fw-bold text-dark">${product.price}</p>
+                                            <p className="card-text">{product.description.substring(0, 100)}...</p>
+
+                                        </div>
+                                    </NavLink>
+                                    <a href="/addtocart" className="text-white text-decoration-none mt-md-auto">
+                                        <button className="addtocart">
+                                            Add to cart
+                                        </button>
+                                    </a>
                                 </div>
+
+
                             </div>
                         </>
                     );
@@ -85,10 +85,16 @@ const Products = () => {
         );
     }
     return (
-        <div>
+        <>
+            <div className="h-50">
+                <h1>Hello</h1>
+            </div>
+
+        <img src="/assets/main.png" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>
+        <div className="hero">
             <div className="container py-5">
                 <div className="row">
-                    <div className="col-12 mb-5">
+                    <div className="col-12 mb-5 mt-xxl-5">
                         <h1 className="display-6 fw-bolder text-center">Products</h1>
                         <hr/>
                     </div>
@@ -98,6 +104,7 @@ const Products = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Skeleton from "react-loading-skeleton";
+import ReactLoading from 'react-loading';
+import {NavLink} from "react-router-dom";
+
 
 const Pets = () => {
 
@@ -11,7 +13,7 @@ const Pets = () => {
     useEffect(() => {
         const getPets = async () => {
             setLoading(true);
-            const response = await fetch("https://628e40fca339dfef87aab9d6.mockapi.io/api/v1/pets/1");
+            const response = await fetch("http://localhost:3000/pets");
             if(componentMounted){
                 setData(await response.clone().json());
                 setFilter(await response.json());
@@ -28,51 +30,55 @@ const Pets = () => {
     const Loading = () => {
         return(
             <>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
-                </div>
-                <div className="col-md-3">
-                    <Skeleton height={350}/>
+                <div className="col-md-12 loading">
+                    <ReactLoading type={'spinningBubbles'} color="#57419D"
+                                  height={467} width={175} className="m-auto pt-lg-5"/>
+                    <br/><br/><br/>
                 </div>
             </>
         )
+    }
+
+    const filterProduct = (grp) => {
+        const updateList = data.filter((x)=>x.group === grp);
+        setFilter(updateList);
     }
 
     const ShowPets = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                    <button className="btn btn-outline-warning me-2">All</button>
-                    <button className="btn btn-outline-dark me-2">Sweets</button>
-                    <button className="btn btn-outline-dark me-2">Accessories</button>
-                    <button className="btn btn-outline-dark me-2">Clothes</button>
-                    <button className="btn btn-outline-dark me-2">Other</button>
+                    <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(data)}>All</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('Cat')}>Cats</button>
+                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('Dog')}>Dogs</button>
 
                 </div>
                 {filter.map((pet)=>{
                     return (
                         <>
                             <div className="col-md-3 product">
+
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={pet.id}>
-                                    <img src={pet.photos} className="card-img-top" alt={pet.name} height="250px"/>
-                                    <div className="card-body">
-                                        <h5 className="card-title mb-0">{pet.name}</h5>
-                                        <p className="card-text">{pet.gender}</p>
-                                        <p className="card-text">{pet.description.substring(0, 100)}...</p>
-                                        <a href="#" className="text-white text-decoration-none shownumb">
+                                    <NavLink to={`/pets/${pet.id}`} className="text-decoration-none">
+                                        <img src={pet.photos} className="card-img-top" alt={pet.name} height="250px"/>
+                                        <div className="card-body">
+                                            <h5 className="card-title mb-0">{pet.name}</h5>
+                                            <p className="card-text">{pet.gender}</p>
+                                            <p className="card-text">{pet.description.substring(0, 100)}...</p>
+
+
+                                            <p className="card-text text-lg-end text-dark number mb-3 fw-bolder" id={`number${pet.id}`}>{pet.owner_number}</p>
+                                        </div>
+                                    </NavLink>
+                                    <div className="shownumb mt-md-auto">
+                                        <a href="" className="text-white text-decoration-none" id={pet.id}>
                                             <button className="addtocart">
                                                 Adopt
                                             </button>
                                         </a>
-                                        <p className="card-text text-lg-end text-dark number">{pet.owner_number}</p>
                                     </div>
                                 </div>
+
                             </div>
                         </>
                     );
@@ -80,20 +86,28 @@ const Pets = () => {
             </>
         );
     }
+
     return (
-        <div>
-            <div className="container py-5">
-                <div className="row">
-                    <div className="col-12 mb-5">
-                        <h1 className="display-6 fw-bolder text-center">Pets</h1>
-                        <hr/>
+        <>
+            <div className="h-50">
+                <h1>Hello</h1>
+            </div>
+            <img src="/assets/pets5.png" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>
+            <div className="hero">
+                <div className="container py-5">
+                    <div className="row">
+                        <div className="col-12 mb-5 mt-xxl-5">
+                            <h1 className="display-6 fw-bolder text-center">Pets</h1>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        {loading ? <Loading/> : <ShowPets/>}
                     </div>
                 </div>
-                <div className="row justify-content-center">
-                    {loading ? <Loading/> : <ShowPets/>}
-                </div>
             </div>
-        </div>
+        </>
+
     );
 }
 
