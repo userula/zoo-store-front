@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import ReactLoading from "react-loading";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 const Product = () => {
@@ -9,16 +11,20 @@ const Product = () => {
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // const dispatch = useDispatch();
+    // const addProduct = (product) => {
+    //     dispatch(addCart(product));
+    // }
+
     useEffect(() => {
         const getProduct = async () => {
             setLoading(true);
             const response = await fetch(`http://localhost:3000/goods/${id}`);
             setProduct(await response.json());
             setLoading(false);
-
         }
         getProduct();
-    }, []);
+    }, [id]);
 
     const Loading = () => {
         return (
@@ -35,7 +41,7 @@ const Product = () => {
         return (
             <>
                 <div className="col-md-6 mt-xxl-5">
-                    <img src={product.photo} alt={product.name} height="400px" width="400px" className="card-img-top"/>
+                    <img src={product.photo} alt={product.name} className=""/>
                 </div>
                 <div className="col-md-6 mt-xxl-5 h-50">
                     <h4 className="text-uppercase text-black-50">{product.category_id}</h4>

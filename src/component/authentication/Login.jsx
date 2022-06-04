@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import '../../css/login.css';
 import $ from 'jquery';
-// import 'font-awesome';
 
 let readerView = false;
 
@@ -9,8 +8,8 @@ let readerView = false;
 const openG1 = () => {
     if(readerView === true)
     {
-        $('#group1').css('background-color', 'aliceblue');
-        $('#group2').css('background-color', 'grey');
+        // $('#group1').css('background-color', 'aliceblue');
+        // $('#group2').css('background-color', 'grey');
         $('.signup').slideToggle();
         $('.login').slideToggle();
         readerView = false;
@@ -20,13 +19,27 @@ const openG1 = () => {
 const openG2 = () => {
     if(readerView === false)
     {
-        $('#group2').css('background-color', 'aliceblue');
-        $('#group1').css('background-color', 'grey');
-        $('#group1').css('color', '#673FD7');
+        // $('#group2').css('background-color', 'aliceblue');
+        // $('#group1').css('background-color', 'grey');
         $('.signup').slideToggle();
         $('.login').slideToggle();
+        // $('.regPassword').addClass('position-absolute');
         readerView = true;
     }
+};
+
+const pass = (data) => {
+  if (data === 'o'){
+      $('#Oeye').css('display', 'none');
+      $('#Ceye').css('display', 'block');
+      $('#signupinput').attr('type', 'text');
+  }
+  else
+  {
+      $('#Oeye').css('display', 'block');
+      $('#Ceye').css('display', 'none');
+      $('#signupinput').attr('type', 'password');
+  }
 };
 
 const Login = () => {
@@ -34,9 +47,7 @@ const Login = () => {
     return (
         <>
         <div className="full">
-            <div className="h-50">
-                <h1>Hello</h1>
-            </div>
+
             <div className="container py-5 mt-xxl-5 mainpage">
                 <div className="row">
 
@@ -79,31 +90,35 @@ const Login = () => {
                                     <br/>
                                     <hr/>
                                     <form>
-                                        <input className="loginp" type="name" id="fnameInput"
-                                               placeholder="First Name"/>
                                         <br/>
-                                        <br/>
-                                        <input className="loginp" type="surname" id="lnameInput"
-                                               placeholder="Last Name"/>
+                                        <input className="loginp" type="name" id="lnameInput"
+                                               placeholder="Name"/>
                                         <br/>
                                         <p id="checkemail"></p>
                                         <input className="loginp" type="email" name="email"
                                                id="emailInput" placeholder="Email Address"/>
                                         <br/>
                                         <br/>
+                                        <div className="regPassword">
+                                            <input id="signupinput"
+                                                   className="loginp"
+                                                   type="password"
+                                                   placeholder="Password"/>
+                                            <div>
+                                                <div id="Oeye" onClick={()=>pass("o")}>
+                                                    <i className='fa fa-eye fa-lg'></i>
+                                                </div>
+
+                                                <div id="Ceye" onClick={()=>pass("c")}>
+                                                    <i className='fa fa-eye-slash fa-lg'></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div>
                                             <input id="signupinput"
                                                    className="loginp"
                                                    type="password"
-                                                   placeholder="Set Password"/>
-
-                                            <div id="Oeye" onClick="pass('o')">
-                                                <i className='fas fa-eye'></i>
-                                            </div>
-
-                                            <div id="Ceye" onClick="pass('c')">
-                                                <i className='fas fa-eye-slash'></i>
-                                            </div>
+                                                   placeholder="Confirm Password"/>
                                         </div>
                                         <br/>
                                         <button className="button button-block"
@@ -113,7 +128,7 @@ const Login = () => {
                                     </form>
                                 </div>
                         </div>
-
+                        <br/><br/>
 
                     </div>
 

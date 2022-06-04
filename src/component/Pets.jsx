@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ReactLoading from 'react-loading';
 import {NavLink} from "react-router-dom";
-
+import $ from 'jquery';
 
 const Pets = () => {
 
@@ -13,7 +13,7 @@ const Pets = () => {
     useEffect(() => {
         const getPets = async () => {
             setLoading(true);
-            const response = await fetch("http://localhost:3000/pets");
+            const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/pet");
             if(componentMounted){
                 setData(await response.clone().json());
                 setFilter(await response.json());
@@ -39,19 +39,34 @@ const Pets = () => {
         )
     }
 
+    const setClass = (grp) => {
+
+    }
+
     const filterProduct = (grp) => {
-        const updateList = data.filter((x)=>x.group === grp);
+        if(grp){
+            let id = $('#btn'+grp).attr('id');
+            $('#btn0').addClass('');
+
+            $('#'+id).removeClass('btn-outline-dark').addClass('btn-outline-info');
+            // alert(t);
+        }
+        else{
+            $('.btn-outline-info').removeClass('btn-outline-info').slideToggle();
+            $('#btn0').removeClass('btn-outline-dark').addClass('btn-outline-info');
+        }
+        const updateList = data.filter((x)=>x.categoryId === grp);
         setFilter(updateList);
+        // setClass(grp);
     }
 
     const ShowPets = () => {
         return (
             <>
-                <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                    <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(data)}>All</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('Cat')}>Cats</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('Dog')}>Dogs</button>
-
+                <div className="buttons d-flex justify-content-center mb-3 pb-5">
+                    <button className="btn btn-outline-info me-2" id="btn0" onClick={()=>setFilter(data)}>All</button>
+                    <button className="btn btn-outline-dark me-2" id="btn2" onClick={()=>filterProduct(2)}>Cats</button>
+                    <button className="btn btn-outline-dark me-2" id="btn1" onClick={()=>filterProduct(1)}>Dogs</button>
                 </div>
                 {filter.map((pet)=>{
                     return (
@@ -62,12 +77,12 @@ const Pets = () => {
                                     <NavLink to={`/pets/${pet.id}`} className="text-decoration-none">
                                         <img src={pet.photos} className="card-img-top" alt={pet.name} height="250px"/>
                                         <div className="card-body">
-                                            <h5 className="card-title mb-0">{pet.name}</h5>
-                                            <p className="card-text">{pet.gender}</p>
-                                            <p className="card-text">{pet.description.substring(0, 100)}...</p>
+                                            <h5 className="card-title mb-0">{pet.breed}</h5>
+                                            <p className="card-text">{pet.gender ? 'male' : 'female'}</p>
+                                            <p className="card-text">{pet.description}</p>
 
 
-                                            <p className="card-text text-lg-end text-dark number mb-3 fw-bolder" id={`number${pet.id}`}>{pet.owner_number}</p>
+                                            <p className="card-text text-lg-end text-dark number mb-3 fw-bolder" id={`number${pet.id}`}>{pet.ownerNumber}</p>
                                         </div>
                                     </NavLink>
                                     <div className="shownumb mt-md-auto">
@@ -89,14 +104,11 @@ const Pets = () => {
 
     return (
         <>
-            <div className="h-50">
-                <h1>Hello</h1>
-            </div>
-            <img src="/assets/pets5.png" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>
+            {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
             <div className="hero">
                 <div className="container py-5">
                     <div className="row">
-                        <div className="col-12 mb-5 mt-xxl-5">
+                        <div className="col-12 mb-5">
                             <h1 className="display-6 fw-bolder text-center">Pets</h1>
                             <hr/>
                         </div>

@@ -1,18 +1,9 @@
 *{
-    font-family: 'Patua One', cursive;
+    /*font-family: 'Patua One', cursive;*/
 }
 /*body{*/
 /*    background-color: grey;*/
 /*}*/
-.rggroups{
-    padding: 30px 0px;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    width: 50%;
-    border: 2px solid #222222;
-    box-shadow: 0 0 10px;
-}
 
 .choose{
     margin: auto;
@@ -30,14 +21,14 @@
 }
 
 
-#group1{
-    background-color: aliceblue;
-    /*color: #FFFFFF;*/
-}
-#group2{
-    background-color: grey;
-    color: #FFFFFF;
-}
+/*#group1{*/
+/*    background-color: aliceblue;*/
+/*    !*color: #FFFFFF;*!*/
+/*}*/
+/*#group2{*/
+/*    background-color: grey;*/
+/*    !*color: #FFFFFF;*!*/
+/*}*/
 
 #h1{
     margin: auto;
@@ -126,17 +117,17 @@
     margin-top:10px;
 }
 
-.full{
+/*.full{*/
 
-    background-image: url("/public/assets/bg_nav.jpg");
-}
+/*    background-image: url("/public/assets/bg_nav.jpg");*/
+/*}*/
 
 .mainpage{
-    height: 83vh;
+    height: 90vh;
 }
 
 .showPage{
-    height: 75vh;
+    height: 100%;
 }
 
 .fa{
@@ -144,3 +135,80 @@
     font-size: 24px;
     cursor: pointer;
 }
+
+.regPassword{
+    display: flex;
+}
+
+#Oeye, #Ceye{
+    margin: 11px 5px 5px 5px; font-size: 24px; cursor: pointer;
+}
+#Oeye{
+    display: block; background: white;
+}
+#Ceye{
+    display: none; background: white;
+}
+
+.loginp{
+    background-color: lightgrey;
+    border-radius: 20px;
+    padding: 10px;
+    color: grey;
+    width: 100%;
+    border: none;
+    height: 50px;
+    font-size: 25px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+#group1, #group2 {
+   align-items: center;
+   background-color: #fff;
+   border: 2px solid #000;
+   box-sizing: border-box;
+   color: #000;
+   cursor: pointer;
+   display: inline-flex;
+   fill: #000;
+   font-family: Inter,sans-serif;
+   font-size: 16px;
+   font-weight: 600;
+   height: 48px;
+   justify-content: center;
+   letter-spacing: -.8px;
+   line-height: 24px;
+   min-width: 140px;
+   outline: 0;
+   padding: 0 17px;
+   text-align: center;
+   text-decoration: none;
+   transition: all .3s;
+   user-select: none;
+   -webkit-user-select: none;
+   touch-action: manipulation;
+}
+
+#group1, #group2:focus {
+    color: #171e29;
+}
+
+#group1, #group2:hover {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}
+
+#group1, #group2:active {
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
+}
+
+@media (min-width: 768px) {
+    #group1, #group2 {
+        min-width: 170px;
+    }
+}
+
