@@ -105,7 +105,7 @@ const Pets = () => {
     return (
         <>
             {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
-            <div className="hero">
+            <div className="hero pets">
                 <div className="container py-5">
                     <div className="row">
                         <div className="col-12 mb-5">

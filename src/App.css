@@ -25,8 +25,8 @@ body{
     /*z-index: 1;*/
 }
 
-.main-page{
-    /*z-index: -1;*/
+.pets{
+    height: 80vh;
 }
 
 .footer{
@@ -56,6 +56,12 @@ body{
 .page{
     /*z-index: -1;*/
     position: fixed;
+}
+
+.homepage{
+    height: 75vh;
+    /*margin-top: 10%;*/
+    /*z-index: -1;*/
 }
 
 .card-img-top{

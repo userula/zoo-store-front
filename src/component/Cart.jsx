@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import ReactLoading from "react-loading";
 import {clearCart} from "../redux/cartSlice";
+import $ from 'jquery';
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);

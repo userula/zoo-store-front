@@ -2,7 +2,6 @@ import Cart from "./component/Cart";
 import Home from "./component/Home";
 import Products from "./component/Products";
 import Product from "./component/Product";
-import Register from "./component/authentication/Register";
 import Login from "./component/authentication/Login";
 import Success from "./component/Success";
 import {
@@ -23,7 +22,6 @@ const App = () => {
             <Route path="/success" element={<Success/>}/>
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/product/:id" element={<Product/>}/>
-            <Route path="/registration" element={<Register/>}/>
             {
                 !user && <Route path="/login" element={<Login/>}/>
             }

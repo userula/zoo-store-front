@@ -53,9 +53,10 @@ const Products = () => {
 
     const handleClick = (pr) => {
         if(isExist(pr)){
-            alert("Already ADDED!");
+            alert("Already ADDED to cart!");
         }
         else {
+            alert('Added!');
             dispatch(addProduct({...pr, quantity}));
         }
     }
