@@ -11,23 +11,6 @@ const Cart = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     const makeRequest = async () => {
-    //         setLoading(true);
-    //         try {
-    //             const response = await userRequest.post("/checkout/payment", {
-    //                 tokenId: stripeToken.id,
-    //                 amount:  100,
-    //             })
-    //             history('/success',{state:response.data});
-    //             setLoading(false);
-    //         } catch (e) {
-    //
-    //         }
-    //     }
-    //     makeRequest();
-    // }, [cart.total, history])
-
     const Loading = () => {
         return(
             <>
@@ -79,7 +62,7 @@ const Cart = () => {
     return (
         <>
             {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
-            <div className="hero">
+            <div className="hero pets">
                 <div className="container py-5">
                     <div className="row">
                         <div className="col-12 mb-5 mt-xxl-5">

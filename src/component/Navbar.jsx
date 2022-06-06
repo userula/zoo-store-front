@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import { useSelector } from "react-redux";
 import {Link} from "react-router-dom";
+import {Container, Nav, NavDropdown} from "react-bootstrap";
 
 const Navbar = () => {
     // const state = useSelector((state) => state.handleCart);
@@ -13,7 +14,7 @@ const Navbar = () => {
                     <div className="container">
                         <Link to="/" className="navbar-brand">
                             <div className="">
-                                <svg width="106" height="68" viewBox="0 0 176 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="91" height="53" viewBox="0 0 176 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g opacity="0.4">
                                         <path d="M87.751 3.28728C101.991 8.31853 122.277 13.2415 133.022 14.2735C143.767 15.3056 153.121 21.6949 153.898 28.5322C154.675 35.3696 163.144 54.7932 172.799 71.8788C182.454 88.9644 169.529 106.109 143.956 110.139L134.107 111.691C108.533 115.721 67.035 115.544 41.4972 111.296L36.9141 110.534C11.3763 106.286 -4.6286 95.4585 1.19691 86.3713C1.19691 86.3713 11.7523 73.8516 11.7523 69.9059C11.7523 65.9602 16.9127 55.4135 16.9127 55.4135C19.7607 47.4151 25.3314 35.3696 29.3446 28.5322C33.3577 21.6949 42.2919 11.2206 49.2825 5.15727C56.2731 -0.906028 73.5108 -1.74397 87.751 3.28728Z" fill="#421EB7"/>
                                     </g>
@@ -26,15 +27,15 @@ const Navbar = () => {
                                     <path d="M140.516 64.3294C137.66 65.284 134.369 69.4669 133.171 73.6641C131.974 77.8612 130.843 81.0877 130.648 80.8645C130.453 80.6412 133.403 79.0873 137.232 77.3967C141.061 75.7061 144.511 71.7045 144.931 68.4665C145.351 65.2286 143.372 63.3747 140.516 64.3294Z" fill="white"/>
                                     <path d="M140.516 64.3294C137.66 65.284 134.369 69.4669 133.171 73.6641C131.974 77.8612 130.843 81.0877 130.648 80.8645C130.453 80.6412 133.403 79.0873 137.232 77.3967C141.061 75.7061 144.511 71.7045 144.931 68.4665C145.351 65.2286 143.372 63.3747 140.516 64.3294Z" stroke="#FB5C76" stroke-width="2.09323" stroke-linecap="square"/>
                                 </svg>
-                                <h5 className="ps-3">ZOOmart</h5>
+                                <h5 className="ps-2">ZOOmart</h5>
                             </div>
                         </Link>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarNav" aria-controls="navbarNav"
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
+                        <div className="navbar-collapse collapse" id="navbarNav">
                             <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                                 <li className="nav-item mx-5">
                                     <a className="nav-link" aria-current="page" href="/">Home</a>
@@ -46,7 +47,7 @@ const Navbar = () => {
                                     <a className="nav-link" href="/pets">Pets</a>
                                 </li>
                                 <li className="nav-item mx-5">
-                                    <a className="nav-link" href="/orders">Orders</a>
+                                    <a className="nav-link disabled" href="/orders">Orders</a>
                                 </li>
                             </ul>
                             {/*<form className="d-flex">*/}
@@ -64,6 +65,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </nav>
+
             </div>
 
     );

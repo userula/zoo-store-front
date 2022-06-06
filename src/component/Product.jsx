@@ -19,8 +19,17 @@ const Product = () => {
     useEffect(() => {
         const getProduct = async () => {
             setLoading(true);
-            const response = await fetch(`http://localhost:3000/goods/${id}`);
-            setProduct(await response.json());
+            const response = await fetch(`https://api-zoo-app.herokuapp.com/api/v1/product/${id}`);
+            let pr = await response.json();
+            if(!pr.id){
+                // alert(!pr.id);
+                const response2 = await fetch(`https://api-zoo-app.herokuapp.com/api/v1/clothes/${id}`);
+                let cl = await response2.json();
+                setProduct(cl);
+            }
+            else{
+                setProduct(pr);
+            }
             setLoading(false);
         }
         getProduct();
@@ -57,10 +66,6 @@ const Product = () => {
 
     return (
         <div>
-            <div className="h-100">
-                <h1>Hello</h1>
-            </div>
-            <br/><br/>
             <div className="container mt-xxl-5 min-vh-100 showPage">
                 <div className="row">
                     {loading ? <Loading/> : <ShowProduct/>}

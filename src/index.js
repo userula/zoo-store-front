@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-// import '../node_modules/tailwindcss/tailwind.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Provider} from "react-redux";
 import {persistor, store} from "./redux/store";
 import {BrowserRouter as Router} from "react-router-dom";

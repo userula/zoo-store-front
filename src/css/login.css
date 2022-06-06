@@ -124,10 +124,12 @@
 
 .mainpage{
     height: 90vh;
+    /*width: 100%;*/
 }
 
 .showPage{
     height: 100%;
+    /*width: 100%;*/
 }
 
 .fa{
@@ -138,6 +140,8 @@
 
 .regPassword{
     display: flex;
+    /*flex-direction: row;*/
+    /*align-items: baseline;*/
 }
 
 #Oeye, #Ceye{
@@ -153,7 +157,7 @@
 .loginp{
     background-color: lightgrey;
     border-radius: 20px;
-    padding: 10px;
+    /*padding: 10px;*/
     color: grey;
     width: 100%;
     border: none;

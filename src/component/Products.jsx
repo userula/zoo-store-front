@@ -6,8 +6,8 @@ import {addProduct} from "../redux/cartSlice";
 
 const Products = () => {
     const cart = useSelector(state => state.cart);
-    const [data, setData] = useState([]);
-    const [filter, setFilter] = useState(data);
+    const [products, setProduct] = useState([]);
+    const [filter, setFilter] = useState(products);
     const [loading, setLoading] = useState(false);
     const [quantity, setQuantity] = useState(1);
     let componentMounted = true;
@@ -16,10 +16,13 @@ const Products = () => {
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
-            const response = await fetch("http://localhost:3000/goods");
+            const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/product");
+            const response2 = await fetch("https://api-zoo-app.herokuapp.com/api/v1/clothes");
             if(componentMounted){
-                setData(await response.clone().json());
-                setFilter(await response.json());
+                let pr = await response.clone().json();
+                let cl = await response2.clone().json()
+                setProduct([...pr, ...cl]);
+                setFilter([...pr, ...cl]);
                 setLoading(false);
             }
 
@@ -27,6 +30,22 @@ const Products = () => {
                 componentMounted = false;
             }
         }
+
+        // const getClothes = async () => {
+        //     setLoading(true);
+        //     const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/clothes");
+        //     if(componentMounted){
+        //         setClothes(await response.clone().json());
+        //         setFilter(await response.json());
+        //         setLoading(false);
+        //         setProduct(products.concat(clothes));
+        //     }
+        //
+        //     return () => {
+        //         componentMounted = false;
+        //     }
+        // }
+        // getClothes();
         getProducts();
     }, []);
 
@@ -43,7 +62,7 @@ const Products = () => {
     }
 
     const filterProduct = (cat) => {
-        const updateList = data.filter((x)=>x.category_id === cat);
+        const updateList = products.filter((x)=>x.category_id === cat);
         setFilter(updateList);
     }
 
@@ -65,7 +84,7 @@ const Products = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-3 pb-5">
-                    <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(data)}>All</button>
+                    <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(products)}>All</button>
                     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('1')}>Sweets</button>
                     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('2')}>Accessories</button>
                     <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('3')}>Clothes</button>
@@ -107,7 +126,7 @@ const Products = () => {
             </div>
 
         {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
-        <div className="hero">
+        <div className="hero pets">
             <div className="container py-5">
                 <div className="row">
                     <div className="col-12 mb-5">

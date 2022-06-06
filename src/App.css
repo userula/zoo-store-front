@@ -26,16 +26,14 @@ body{
 }
 
 .pets{
-    height: 80vh;
+    min-height: 80vh;
+    /*height: 80vh;*/
 }
 
 .footer{
     border-top: 2px solid #7a00ff;
     /*margin-top: 10%;*/
 }
-/*.footer{*/
-/*    z-index: 1;*/
-/*}*/
 
 .showPage{
     box-shadow: 0 0 20px;

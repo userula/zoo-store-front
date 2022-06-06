@@ -48,7 +48,7 @@ const Login = () => {
         <>
         <div className="full">
 
-            <div className="container py-5 mt-xxl-5 mainpage">
+            <div className="container py-5 mt-xxl-5 mainpage w-50">
                 <div className="row">
 
                     <div className="showPage">
@@ -101,7 +101,7 @@ const Login = () => {
                                         <br/>
                                         <div className="regPassword">
                                             <input id="signupinput"
-                                                   className="loginp"
+                                                   className="loginp col-md-10"
                                                    type="password"
                                                    placeholder="Password"/>
                                             <div>

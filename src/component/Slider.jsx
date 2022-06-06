@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
+import {NavLink} from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -53,7 +54,7 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 100%;
 `;
 
 const InfoContainer = styled.div`
@@ -77,7 +78,9 @@ const Button = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  
 `;
+
 
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
@@ -93,7 +96,7 @@ const Slider = () => {
         <Container>
             <Arrow direction="left" onClick={() => handleClick("left")}>
                 {/*<ArrowLeftOutlined />*/}
-                <i className="fa fa-arrow-left fa-2x"></i>
+                <i className="fa fa-arrow-left fa-2x pb-2"></i>
             </Arrow>
             <Wrapper slideIndex={slideIndex}>
                 {sliderItems.map((item) => (
@@ -104,14 +107,16 @@ const Slider = () => {
                         <InfoContainer>
                             <Title>{item.title}</Title>
                             <Desc>{item.desc}</Desc>
-                            <Button>SHOW NOW</Button>
+                            <NavLink to="/products">
+                                <Button>SHOW NOW</Button>
+                            </NavLink>
                         </InfoContainer>
                     </Slide>
                 ))}
             </Wrapper>
             <Arrow direction="right" onClick={() => handleClick("right")}>
                 {/*<ArrowRightOutlined />*/}
-                <i className="fa fa-arrow-right fa-2x"></i>
+                <i className="fa fa-arrow-right fa-2x pb-2"></i>
             </Arrow>
         </Container>
     );

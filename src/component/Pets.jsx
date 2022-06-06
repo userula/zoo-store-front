@@ -81,7 +81,6 @@ const Pets = () => {
                                             <p className="card-text">{pet.gender ? 'male' : 'female'}</p>
                                             <p className="card-text">{pet.description}</p>
 
-
                                             <p className="card-text text-lg-end text-dark number mb-3 fw-bolder" id={`number${pet.id}`}>{pet.ownerNumber}</p>
                                         </div>
                                     </NavLink>
