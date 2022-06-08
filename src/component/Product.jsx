@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom";
 import ReactLoading from "react-loading";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import {addProduct} from "../redux/cartSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const Product = () => {
@@ -32,6 +34,13 @@ const Product = () => {
             }
             setLoading(false);
         }
+        // const getProduct = async () => {
+        //     setLoading(true);
+        //     const response = await fetch(`http://localhost:3000/goods/${id}`);
+        //     let pr = await response.json();
+        //     setProduct(pr);
+        //     setLoading(false);
+        // }
         getProduct();
     }, [id]);
 
@@ -46,18 +55,34 @@ const Product = () => {
         )
     }
 
+    const cart = useSelector(state => state.cart);
+    const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+    const isExist = (current_pr) => cart.products.some(pr => {
+        return pr.id === current_pr.id;
+    });
+    const handleClick = (pr) => {
+        if(isExist(pr)){
+            alert("Already ADDED to cart!");
+        }
+        else {
+            alert('Added!');
+            dispatch(addProduct({...pr, quantity}));
+        }
+    }
+
     const ShowProduct = () => {
         return (
             <>
                 <div className="col-md-6 mt-xxl-5">
-                    <img src={product.photo} alt={product.name} className=""/>
+                    <img src={product.photo} alt={product.name} className="w-100"/>
                 </div>
                 <div className="col-md-6 mt-xxl-5 h-50">
                     <h4 className="text-uppercase text-black-50">{product.category_id}</h4>
                     <h1 className="lead display-5">{product.name}</h1>
                     <p className="lead">{product.description}</p>
                     <div className="mt-100 justify-content-end text-lg-center">
-                        <button className="btn btn-outline-primary">Add to cart</button>
+                        <button className="btn btn-outline-primary" onClick={()=>handleClick(product)}>Add to cart</button>
                     </div>
                 </div>
             </>

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import ReactLoading from 'react-loading';
 import {NavLink} from "react-router-dom";
 import $ from 'jquery';
+import {Button, Modal} from "react-bootstrap";
 
 const Pets = () => {
 
@@ -14,7 +15,8 @@ const Pets = () => {
         const getPets = async () => {
             setLoading(true);
             const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/pet");
-            if(componentMounted){
+            // const response = await fetch("http://localhost:3000/pets");
+            if (componentMounted) {
                 setData(await response.clone().json());
                 setFilter(await response.json());
                 setLoading(false);
@@ -28,7 +30,7 @@ const Pets = () => {
     }, []);
 
     const Loading = () => {
-        return(
+        return (
             <>
                 <div className="col-md-12 loading">
                     <ReactLoading type={'spinningBubbles'} color="#57419D"
@@ -44,56 +46,83 @@ const Pets = () => {
     }
 
     const filterProduct = (grp) => {
-        if(grp){
-            let id = $('#btn'+grp).attr('id');
+        if (grp) {
+            let id = $('#btn' + grp).attr('id');
             $('#btn0').addClass('');
 
-            $('#'+id).removeClass('btn-outline-dark').addClass('btn-outline-info');
+            $('#' + id).removeClass('btn-outline-dark').addClass('btn-outline-info');
             // alert(t);
-        }
-        else{
+        } else {
             $('.btn-outline-info').removeClass('btn-outline-info').slideToggle();
             $('#btn0').removeClass('btn-outline-dark').addClass('btn-outline-info');
         }
-        const updateList = data.filter((x)=>x.categoryId === grp);
+        const updateList = data.filter((x) => x.categoryId === grp);
         setFilter(updateList);
         // setClass(grp);
+    }
+
+    const adopt = (p) => {
+
+    }
+    const [modalPet, setModalPet] = useState({});
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = (p) => {
+        setModalPet(p);
+        setShow(true);
     }
 
     const ShowPets = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-3 pb-5">
-                    <button className="btn btn-outline-info me-2" id="btn0" onClick={()=>setFilter(data)}>All</button>
-                    <button className="btn btn-outline-dark me-2" id="btn2" onClick={()=>filterProduct(2)}>Cats</button>
-                    <button className="btn btn-outline-dark me-2" id="btn1" onClick={()=>filterProduct(1)}>Dogs</button>
+                    <button className="btn btn-outline-info me-2 col-md-1" id="btn0" onClick={() => setFilter(data)}>All</button>
+                    <button className="btn btn-outline-dark me-2 col-md-1" id="btn2" onClick={() => filterProduct(2)}>Cats
+                    </button>
+                    <button className="btn btn-outline-dark me-2 col-md-1" id="btn1" onClick={() => filterProduct(1)}>Dogs
+                    </button>
                 </div>
-                {filter.map((pet)=>{
+                {filter.map((pet) => {
                     return (
                         <>
                             <div className="col-md-3 product">
 
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={pet.id}>
-                                    <NavLink to={`/pets/${pet.id}`} className="text-decoration-none">
+                                    {/*<NavLink to={`/pets/${pet.id}`} className="text-decoration-none">*/}
                                         <img src={pet.photos} className="card-img-top" alt={pet.name} height="250px"/>
                                         <div className="card-body">
                                             <h5 className="card-title mb-0">{pet.breed}</h5>
+                                            {/*<h5 className="card-title mb-0">{pet.name}</h5>*/}
                                             <p className="card-text">{pet.gender ? 'male' : 'female'}</p>
-                                            <p className="card-text">{pet.description}</p>
-
-                                            <p className="card-text text-lg-end text-dark number mb-3 fw-bolder" id={`number${pet.id}`}>{pet.ownerNumber}</p>
+                                            {/*<p className="card-text">{pet.gender}</p>*/}
+                                            <p className="card-text">{pet.description.substring(0, 100)}...</p>
                                         </div>
-                                    </NavLink>
+                                    {/*</NavLink>*/}
                                     <div className="shownumb mt-md-auto">
-                                        <a href="" className="text-white text-decoration-none" id={pet.id}>
-                                            <button className="addtocart">
-                                                Adopt
-                                            </button>
-                                        </a>
+                                        <button className="addtocart" type="button" onClick={()=>handleShow(pet)}>
+                                            Adopt
+                                        </button>
+                                        <Modal show={show} onHide={handleClose}>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>{modalPet.name}</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>Contacts: <strong>{modalPet.ownerNumber}</strong></Modal.Body>
+                                            <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleClose}>
+                                                    Close
+                                                </Button>
+                                                <a href={`https://wa.me/7${modalPet.ownerNumber}`} target="_blank">
+                                                    <Button variant="success" onClick={handleClose}>
+                                                        WhatsApp
+                                                    </Button>
+                                                </a>
+                                            </Modal.Footer>
+                                        </Modal>
                                     </div>
                                 </div>
 
                             </div>
+
                         </>
                     );
                 })}

@@ -1,4 +1,6 @@
 /* Navbar */
+@import "./css/authorization.scss";
+
 body{
     background: url('/public/assets/backgr.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -28,6 +30,9 @@ body{
 .pets{
     min-height: 80vh;
     /*height: 80vh;*/
+}
+.full{
+    min-height: 80vh;
 }
 
 .footer{
@@ -69,7 +74,7 @@ body{
 .col-md-3{
     opacity: 1;
     transition: .5s;
-    transform: scale(.9);
+    transform: scale(.95);
     position: relative;
 }
 
@@ -277,4 +282,9 @@ body{
 .button-48 span {
     z-index: 1;
     position: relative;
+}
+
+.login{
+    /*width: 500px;*/
+    margin: auto;
 }

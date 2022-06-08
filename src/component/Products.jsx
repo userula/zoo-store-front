@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import ReactLoading from "react-loading";
 import {useDispatch, useSelector} from "react-redux";
 import {addProduct} from "../redux/cartSlice";
+import {api_link} from "../index";
 
 const Products = () => {
     const cart = useSelector(state => state.cart);
@@ -16,8 +17,8 @@ const Products = () => {
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
-            const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/product");
-            const response2 = await fetch("https://api-zoo-app.herokuapp.com/api/v1/clothes");
+            const response = await fetch(`${api_link}/product`);
+            const response2 = await fetch(`${api_link}/clothes`);
             if(componentMounted){
                 let pr = await response.clone().json();
                 let cl = await response2.clone().json()
@@ -31,21 +32,19 @@ const Products = () => {
             }
         }
 
-        // const getClothes = async () => {
+        // const getProducts = async () => {
         //     setLoading(true);
-        //     const response = await fetch("https://api-zoo-app.herokuapp.com/api/v1/clothes");
+        //     const response = await fetch("http://localhost:3000/goods");
         //     if(componentMounted){
-        //         setClothes(await response.clone().json());
+        //         setProduct(await response.clone().json());
         //         setFilter(await response.json());
         //         setLoading(false);
-        //         setProduct(products.concat(clothes));
         //     }
         //
         //     return () => {
         //         componentMounted = false;
         //     }
         // }
-        // getClothes();
         getProducts();
     }, []);
 
@@ -62,7 +61,7 @@ const Products = () => {
     }
 
     const filterProduct = (cat) => {
-        const updateList = products.filter((x)=>x.category_id === cat);
+        const updateList = products.filter((x)=>x.categoryId === cat);
         setFilter(updateList);
     }
 
@@ -83,12 +82,12 @@ const Products = () => {
     const ShowProducts = () => {
         return (
             <>
-                <div className="buttons d-flex justify-content-center mb-3 pb-5">
-                    <button className="btn btn-outline-warning me-2" onClick={()=>setFilter(products)}>All</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('1')}>Sweets</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('2')}>Accessories</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('3')}>Clothes</button>
-                    <button className="btn btn-outline-dark me-2" onClick={()=>filterProduct('4')}>Other</button>
+                <div className="buttons mb-3 pb-5 text-center">
+                    <button className="btn btn-outline-warning m-2 col-md-1" onClick={()=>setFilter(products)}>All</button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(1)}>Sweets</button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(2)}>Accessories</button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(3)}>Clothes</button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(null)}>Other</button>
 
                 </div>
                 {filter.map((product)=>{
@@ -100,7 +99,7 @@ const Products = () => {
                                     <NavLink to={`/product/${product.id}`} className="text-decoration-none">
                                         <img src={product.photo} className="card-img-top" alt={product.name} height="250px"/>
                                         <div className="card-body">
-                                            <h5 className="card-title mb-0">{product.name}</h5>
+                                            <h5 className="card-title mb-0">{product.categoryId}. {product.name}</h5>
                                             <p className="card-text lead fw-bold text-dark">${product.price}</p>
                                             <p className="card-text">{product.description.substring(0, 100)}...</p>
                                         </div>

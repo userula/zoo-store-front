@@ -3,7 +3,9 @@ import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import ReactLoading from "react-loading";
 import {clearCart} from "../redux/cartSlice";
-import $ from 'jquery';
+import $ from 'jquery'
+import StripeCheckout from "react-stripe-checkout";
+import {image} from "tailwindcss/lib/util/dataTypes";
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);
@@ -28,11 +30,30 @@ const Cart = () => {
         setData([]);
     }
 
+    const [stripeToken, setStripeToken] = useState(null);
+    const KEY = process.env.REACT_APP_STRIPE;
+    const onToken = (token) => {
+        // Stripe(KEY);
+        setStripeToken(token);
+    }
+
     const ShowCart = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-5 pb-5">
-                    <button className="btn btn-outline-success me-2" >CHECKOUT</button>
+
+                    <StripeCheckout
+                        name="ZOOmart"
+                        image=""
+                        billingAddress
+                        shippingAddress
+                        description={`Your total is $${cart.total}`}
+                        amount={cart.total * 100}
+                        token={onToken}
+                        stripeKey={stripeToken}
+                    >
+                        <button className="btn btn-outline-success me-2">CHECKOUT</button>
+                    </StripeCheckout>
                     <button className="btn btn-outline-danger me-2" onClick={Clear} >Clear cart</button>
                 </div>
                 {data.map((product)=>{
