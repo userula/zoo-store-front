@@ -44,7 +44,7 @@ const Cart = () => {
 
                     <StripeCheckout
                         name="ZOOmart"
-                        image=""
+                        image="https://i.ibb.co/h8BLc2Q/logo.png"
                         billingAddress
                         shippingAddress
                         description={`Your total is $${cart.total}`}

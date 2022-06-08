@@ -10,8 +10,18 @@ import {
 } from "react-router-dom";
 import {useSelector} from "react-redux";
 import Pets from "./component/Pets";
+import {useEffect} from "react";
 
 const App = () => {
+    const CheckToMobile = () => {
+        if(window.outerWidth <= 800){
+            alert('AAAA');
+        }
+    }
+    useEffect(() => {
+        CheckToMobile();
+
+    }, []);
     const user = useSelector(state => state.user.currentUser);
     return (
         <Routes>

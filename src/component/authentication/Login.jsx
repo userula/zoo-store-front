@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import '../../css/login.css';
 import $ from 'jquery';
-import {api_link} from "../../index";
-
+import {api_link, client_id} from "../../index";
+import GoogleLogin from 'react-google-login';
 
 let readerView = false;
 
@@ -39,6 +39,21 @@ const pass = (data) => {
         $('#signupinput').attr('type', 'password');
     }
 };
+
+// const [loginData, setLoginData] = useState(
+//     localStorage.getItem('loginData') ? JSON.parse(localStorage.getItem('loginData')) : null
+// );
+
+const handleLogin = (response) => {
+    console.log(response.tokenId);
+    alert(response.tokenId);
+};
+const handleFailure = (response) => {
+    console.log(response);
+    alert(response.error);
+};
+
+
 
 const Login = () => {
 
@@ -82,6 +97,22 @@ const Login = () => {
                                         <button className="button button-block" type='submit' id="logbtn">Log In
                                         </button>
                                     </form>
+                                    <br/>
+                                    {/*<a href="https://api-zoo-app.herokuapp.com" target="_blank">*/}
+                                    {/*    <button className="btn google btn-outline-danger text-uppercase fw-bold"*/}
+                                    {/*            type="submit">*/}
+                                    {/*        <i className="fa fa-google me-2" aria-hidden="true"></i> Sign in with Google*/}
+                                    {/*    </button>*/}
+                                    {/*</a>*/}
+
+                                    <GoogleLogin
+                                        clientId={client_id}
+                                        buttonText="SIGN IN WITH GOOGLE"
+                                        onSuccess={handleLogin}
+                                        onFailure={handleFailure}
+                                        cookiePolicy={'single_host_origin'}
+                                        redirectUri="/"
+                                    ></GoogleLogin>
                                 </div>
                             </div>
 

@@ -18,7 +18,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-
                 <Router>
                     <NavbarMain/>
                     <App />
@@ -28,7 +27,8 @@ root.render(
         </Provider>
 );
 
-export const api_link = "https://api-zoo-app.herokuapp.com/api/v1"
+export const api_link = "https://api-zoo-app.herokuapp.com/api/v1";
+export const client_id = "422824741850-v7076qld2jlq73egm0302u3og576v4b1.apps.googleusercontent.com";
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -111,6 +111,13 @@
     /*width: 100%;*/
 }
 
+.fa-google{
+    color: dodgerblue;
+}
+.google:hover .fa-google{
+    color: white;
+}
+
 .showPage{
     height: 100%;
     min-width: 300px;
