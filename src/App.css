@@ -28,11 +28,18 @@ body{
 }
 
 .pets{
-    min-height: 80vh;
+    min-height: 85vh;
     /*height: 80vh;*/
 }
 .full{
     min-height: 80vh;
+}
+
+.inp{
+    background: #57419D;
+    color: white;
+    border: none;
+    border-radius: 20px;
 }
 
 .footer{

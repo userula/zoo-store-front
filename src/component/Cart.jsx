@@ -36,24 +36,27 @@ const Cart = () => {
         // Stripe(KEY);
         setStripeToken(token);
     }
-
+    const user = useSelector((state) => state.user.currentUser);
     const ShowCart = () => {
         return (
             <>
                 <div className="buttons d-flex justify-content-center mb-5 pb-5">
 
-                    <StripeCheckout
+                    { user ? (<StripeCheckout
                         name="ZOOmart"
                         image="https://i.ibb.co/h8BLc2Q/logo.png"
                         billingAddress
                         shippingAddress
                         description={`Your total is $${cart.total}`}
+                        email={user.email}
                         amount={cart.total * 100}
                         token={onToken}
                         stripeKey={stripeToken}
                     >
                         <button className="btn btn-outline-success me-2">CHECKOUT</button>
-                    </StripeCheckout>
+                    </StripeCheckout>) : (<a href="/login" className="btn btn-outline-primary me-2">
+                        <i className="fa fa-sign-in me-1"> </i>Login to buy
+                    </a>)}
                     <button className="btn btn-outline-danger me-2" onClick={Clear} >Clear cart</button>
                 </div>
                 {data.map((product)=>{

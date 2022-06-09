@@ -3,6 +3,7 @@ import '../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {logOut} from "../redux/userSlice";
 
 // const [loginData, setLoginData] = useState(
 //     localStorage.getItem('loginData') ? JSON.parse(localStorage.getItem('loginData')) : null
@@ -17,6 +18,20 @@ const NavbarMain = () => {
     const handleLogout = () => {
         localStorage.removeItem('loginData');
         // setLoginData(null);
+    };
+
+    const NavInfo = () => {
+        return (
+            <>
+                <a href="/profile" className="text-decoration-none">
+                    <i className="fa fa-user me-1"></i> {user.firstName}
+                </a>
+            </>
+        );
+    };
+
+    const logout = () => {
+        dispatch(logOut(null));
     };
 
     return (
@@ -67,31 +82,23 @@ const NavbarMain = () => {
                             <Nav.Link href="/products" className="mx-5 m-2">Products</Nav.Link>
                             <Nav.Link href="/pets" className="mx-5 m-2">Pets</Nav.Link>
                             <Nav.Link href="/orders" className="mx-5 m-2" disabled>Orders</Nav.Link>
-                            {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
-                            {/*    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Divider />*/}
-                            {/*    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                            {/*</NavDropdown>*/}
+
 
                         </Nav>
                         <div className="navbar-nav buttons flex-row justify-content-around">
                             {
-                                user ? (
-                                    // <a href="/profile">
-                                    //     <i className="fa fa-user me-1"></i>{loginData.email}
-                                    // </a>
-                                    <a href="" onClick={handleLogout} className="btn btn-outline-primary">
-                                        <i className="fa fa-sign-out me-1"> </i>Logout
-                                    </a>) : (<a href="/login" className="btn btn-outline-primary">
-                                <i className="fa fa-sign-in me-1"> </i>Login
-                                </a>)
+                                user ? (<NavDropdown title={<NavInfo/>} id="basic-nav-dropdown">
+                                        <NavDropdown.Item href="/profile">Settings</NavDropdown.Item>
+                                        <NavDropdown.Divider/>
+                                        <NavDropdown.Item onClick={logout} href="/">
+                                            <i className="fa fa-sign-out me-1"> </i> Logout
+                                        </NavDropdown.Item>
+                                        {/*<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
+                                    </NavDropdown>) :
+                                    (<a href="/login" className="btn btn-outline-primary">
+                                        <i className="fa fa-sign-in me-1"> </i>Login
+                                    </a>)
                             }
-                            {/*<a href="/login" className="btn btn-outline-primary">*/}
-                            {/*    <i className="fa fa-sign-in me-1"> </i>Login*/}
-                            {/*</a>*/}
-
                             <a href="/cart" className="btn btn-outline-dark ms-2">
                                 <i className="fa fa-shopping-cart me-1"> </i>Cart ({quantity})
                             </a>

@@ -11,7 +11,10 @@ import {persistor, store} from "./redux/store";
 import {BrowserRouter as Router} from "react-router-dom";
 import { PersistGate } from 'redux-persist/integration/react'
 import NavbarMain from "./component/Navbar";
+import Popper from '@popperjs/core';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Footer from "./component/Footer";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

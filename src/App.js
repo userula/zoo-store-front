@@ -11,6 +11,7 @@ import {
 import {useSelector} from "react-redux";
 import Pets from "./component/Pets";
 import {useEffect} from "react";
+import Profile from "./component/Profile";
 
 const App = () => {
     const CheckToMobile = () => {
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/success" element={<Success/>}/>
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/product/:id" element={<Product/>}/>
+            <Route path="/profile" element={<Profile/>}/>
             {
                 !user && <Route path="/login" element={<Login/>}/>
             }
