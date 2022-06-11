@@ -1,4 +1,4 @@
-import {useState, useCallback} from 'react';
+import {useCallback, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "../redux/userSlice";
 
@@ -32,10 +32,10 @@ export const useHttp = () => {
                     setSuccess('logged');
                     if (data.firstName === null) {
                         login(data);
-                        window.location.href = "/profile"
+                        window.location.href = "/profile";
                     }
                     login(data);
-                    window.location.href = "/"
+                    window.location.href = "/";
                 }
                 setLoading(false);
                 return data;
@@ -113,8 +113,21 @@ export const useHttp = () => {
                 headers['Content-Type'] = 'application/json';
             }
             const resp = await fetch(url, {method, body, headers});
-            const data = await resp.json();
+            return await resp.json();
+        }
+        catch (e){
 
+        }
+    }, []);
+
+    const getOrders = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+        try {
+            if(body){
+                body = JSON.stringify(body);
+                headers['Content-Type'] = 'application/json';
+            }
+            const resp = await fetch(url, {method, body, headers});
+            return await resp[0].json();
         }
         catch (e){
 
@@ -123,5 +136,5 @@ export const useHttp = () => {
 
     const clearError = useCallback(() => setError(null), []);
     const clearMsg = useCallback(() => setSuccess(null), []);
-    return {updateUser, loading, request, error, clearError, success, clearMsg, send_order};
+    return {updateUser, loading, request, error, clearError, success, clearMsg, send_order, getOrders};
 }

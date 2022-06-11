@@ -16,6 +16,7 @@ const Profile = () => {
     const [er, setEr] = useState('');
     const [msg, setMsg] = useState('');
     useEffect(() => {
+        // window.M.updateTextFields();
         setEr(error);
         setMsg(success);
     });

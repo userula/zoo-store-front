@@ -4,6 +4,11 @@ import ReactLoading from "react-loading";
 import {useDispatch, useSelector} from "react-redux";
 import {addProduct} from "../redux/cartSlice";
 import {api_link} from "../index";
+import "react-toastify/dist/ReactToastify.css";
+import {toast} from "react-toastify";
+
+
+// toast.configure()
 
 const Products = () => {
     const cart = useSelector(state => state.cart);
@@ -73,9 +78,11 @@ const Products = () => {
 
     const handleClick = (pr) => {
         if (isExist(pr)) {
-            alert("Already ADDED to cart!");
+            toast("Already ADDED to cart!", {type: "warning"});
+            // alert("Already ADDED to cart!");
         } else {
-            alert('Added!');
+            // alert('Added!');
+            toast("Added!", {type: 'success'});
             dispatch(addProduct({...pr, quantity}));
         }
     }
@@ -95,7 +102,7 @@ const Products = () => {
                     <button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(3)}>Clothes
                     </button>
                     <button className="btn btn-outline-dark m-2 col-md-1"
-                            onClick={() => filterProduct(null)}>Other
+                            onClick={() => filterProduct(9)}>Other
                     </button>
 
                 </div>

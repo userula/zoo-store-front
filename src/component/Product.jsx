@@ -75,15 +75,15 @@ const Product = () => {
         return (
             <>
                 <div className="col-md-6 mt-xxl-5">
-                    <img src={product.photo} alt={product.name} className="w-100"/>
+                    <img src={product.image} alt={product.name} className="w-75"/>
                 </div>
                 <div className="col-md-6 mt-xxl-5 h-50">
                     <h4 className="text-uppercase text-black-50">{product.category_id}</h4>
                     <h1 className="lead display-5">{product.name}</h1>
                     <p className="lead">{product.description}</p>
-                    <div className="mt-100 justify-content-end text-lg-center">
-                        <button className="btn btn-outline-primary" onClick={()=>handleClick(product)}>Add to cart</button>
-                    </div>
+                </div>
+                <div className="justify-content-end text-lg-center mx-lg-5">
+                    <button className="btn btn-outline-primary" onClick={()=>handleClick(product)}>Add to cart</button>
                 </div>
             </>
         )

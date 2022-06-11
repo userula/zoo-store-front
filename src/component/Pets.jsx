@@ -78,9 +78,12 @@ const Pets = () => {
                 <div className="buttons d-flex justify-content-center mb-3 pb-5">
                     <button className="btn btn-outline-info me-2 col-md-1" id="btn0" onClick={() => setFilter(data)}>All</button>
                     <button className="btn btn-outline-dark me-2 col-md-1" id="btn2" onClick={() => filterProduct(2)}>Cats
+                    </button><button className="btn btn-outline-dark me-2 col-md-1" id="btn1" onClick={() => filterProduct(1)}>Dogs
+                </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(5)}>Birds
+                    </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(8)}>Fish
+                    </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(6)}>Rodents
                     </button>
-                    <button className="btn btn-outline-dark me-2 col-md-1" id="btn1" onClick={() => filterProduct(1)}>Dogs
-                    </button>
+
                 </div>
                 {filter.map((pet) => {
                     return (
@@ -89,7 +92,7 @@ const Pets = () => {
 
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={pet.id}>
                                     {/*<NavLink to={`/pets/${pet.id}`} className="text-decoration-none">*/}
-                                        <img src={pet.photos} className="card-img-top" alt={pet.name} height="250px"/>
+                                        <img src={pet.image} className="card-img-top" alt={pet.name} height="250px"/>
                                         <div className="card-body">
                                             <h5 className="card-title mb-0">{pet.breed}</h5>
                                             {/*<h5 className="card-title mb-0">{pet.name}</h5>*/}

@@ -9,7 +9,7 @@ import {image} from "tailwindcss/lib/util/dataTypes";
 import {useHttp} from "../hooks/http.hook";
 import {api_link} from "../index";
 import alert from "bootstrap/js/src/alert";
-// import {Stripe} from "stripe";
+
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);
@@ -49,8 +49,11 @@ const Cart = () => {
     const onToken = (token, address) => {
         // Stripe(KEY);
         // setStripeToken(token);
-        if(token.object === "token"){
-            createOrder().then(r => {});
+        if (token.object === "token") {
+            createOrder().then(r => {
+            });
+
+            // toast('')
 
         }
         console.log(token);
@@ -96,17 +99,19 @@ const Cart = () => {
             "orders": list
         }
         try {
-            await send_order(`${api_link}/order/create`, 'POST', {...order}, {"Authorization": "Bearer " + user.token})
+            let resp = await send_order(`${api_link}/order/create`, 'POST', {...order}, {"Authorization": "Bearer " + user.token})
+            let data = fetch(`${api_link}/order/pay/${resp.id}`);
+
+
         } catch (e) {
             alert(e);
         }
     };
 
     const buy = () => {
-        if(data === []){
+        if (data === []) {
 
-        }
-        else{
+        } else {
             dispatch(clearCart());
             setData([]);
         }
