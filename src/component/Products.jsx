@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import ReactLoading from "react-loading";
 import {useDispatch, useSelector} from "react-redux";
@@ -19,9 +19,9 @@ const Products = () => {
             setLoading(true);
             const response = await fetch(`${api_link}/product`);
             const response2 = await fetch(`${api_link}/clothes`);
-            if(componentMounted){
+            if (componentMounted) {
                 let pr = await response.clone().json();
-                let cl = await response2.clone().json()
+                let cl = await response2.clone().json();
                 setProduct([...pr, ...cl]);
                 setFilter([...pr, ...cl]);
                 setLoading(false);
@@ -31,25 +31,25 @@ const Products = () => {
                 componentMounted = false;
             }
         }
+        // getDoctorAvatar('13');
 
-        // const getProducts = async () => {
-        //     setLoading(true);
-        //     const response = await fetch("http://localhost:3000/goods");
-        //     if(componentMounted){
-        //         setProduct(await response.clone().json());
-        //         setFilter(await response.json());
-        //         setLoading(false);
-        //     }
-        //
-        //     return () => {
-        //         componentMounted = false;
-        //     }
-        // }
         getProducts();
     }, []);
 
+    // const getDoctorAvatar = async (id) => {
+    //     try {
+    //         return await fetch(`${api_link}/image/${id}`).then((res) => {
+    //             res.blob().then((myBlob) => {
+    //                 return URL.createObjectURL(myBlob);
+    //             });
+    //         });
+    //     } catch (e) {
+    //         console.log(e.message);
+    //     }
+    // };
+
     const Loading = () => {
-        return(
+        return (
             <>
                 <div className="col-md-12 loading">
                     <ReactLoading type={'spinningBubbles'} color="#57419D"
@@ -61,7 +61,7 @@ const Products = () => {
     }
 
     const filterProduct = (cat) => {
-        const updateList = products.filter((x)=>x.categoryId === cat);
+        const updateList = products.filter((x) => x.categoryId === cat);
         setFilter(updateList);
     }
 
@@ -69,11 +69,12 @@ const Products = () => {
         return pr.id === current_pr.id;
     });
 
+    const [img, setImg] = useState('');
+
     const handleClick = (pr) => {
-        if(isExist(pr)){
+        if (isExist(pr)) {
             alert("Already ADDED to cart!");
-        }
-        else {
+        } else {
             alert('Added!');
             dispatch(addProduct({...pr, quantity}));
         }
@@ -83,21 +84,29 @@ const Products = () => {
         return (
             <>
                 <div className="buttons mb-3 pb-5 text-center">
-                    <button className="btn btn-outline-warning m-2 col-md-1" onClick={()=>setFilter(products)}>All</button>
-                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(1)}>Sweets</button>
-                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(2)}>Accessories</button>
-                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(3)}>Clothes</button>
-                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={()=>filterProduct(null)}>Other</button>
+                    <button className="btn btn-outline-warning m-2 col-md-1"
+                            onClick={() => setFilter(products)}>All
+                    </button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(1)}>Sweets
+                    </button>
+                    <button className="btn btn-outline-dark m-2 col-md-1"
+                            onClick={() => filterProduct(4)}>Accessories
+                    </button>
+                    <button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(3)}>Clothes
+                    </button>
+                    <button className="btn btn-outline-dark m-2 col-md-1"
+                            onClick={() => filterProduct(null)}>Other
+                    </button>
 
                 </div>
-                {filter.map((product)=>{
+                {filter.map((product) => {
                     return (
                         <>
                             <div className="col-md-3 product">
-
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={product.id}>
-                                    <NavLink to={`/product/${product.id}`} className="text-decoration-none">
-                                        <img src={product.photo} className="card-img-top" alt={product.name} height="250px"/>
+                                    <NavLink to={`/product/${product.productId}`} className="text-decoration-none">
+                                        <img src={product.image} className="card-img-top"
+                                             alt={product.name} height="250px"/>
                                         <div className="card-body">
                                             <h5 className="card-title mb-0">{product.categoryId}. {product.name}</h5>
                                             <p className="card-text lead fw-bold text-dark">${product.price}</p>
@@ -105,7 +114,7 @@ const Products = () => {
                                         </div>
                                     </NavLink>
 
-                                    <div className="text-white mt-md-auto" onClick={()=>handleClick(product)}>
+                                    <div className="text-white mt-md-auto" onClick={() => handleClick(product)}>
                                         <button className="addtocart">
                                             Add to cart
                                         </button>
@@ -124,20 +133,20 @@ const Products = () => {
             <div className="">
             </div>
 
-        {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
-        <div className="hero pets">
-            <div className="container py-5">
-                <div className="row">
-                    <div className="col-12 mb-5">
-                        <h1 className="display-6 fw-bolder text-center">Products</h1>
-                        <hr/>
+            {/*<img src="/assets/backgr.jpg" className="bg-image page mt-xxl-5" alt="Background" height="100%" width="100%"/>*/}
+            <div className="hero pets">
+                <div className="container py-5">
+                    <div className="row">
+                        <div className="col-12 mb-5">
+                            <h1 className="display-6 fw-bolder text-center">Products</h1>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        {loading ? <Loading/> : <ShowProducts/>}
                     </div>
                 </div>
-                <div className="row justify-content-center">
-                    {loading ? <Loading/> : <ShowProducts/>}
-                </div>
             </div>
-        </div>
         </>
     );
 }

@@ -12,6 +12,8 @@ import {useSelector} from "react-redux";
 import Pets from "./component/Pets";
 import {useEffect} from "react";
 import Profile from "./component/Profile";
+import Orders from "./component/Orders";
+import Message from "./component/Message";
 
 const App = () => {
     const CheckToMobile = () => {
@@ -34,8 +36,12 @@ const App = () => {
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/product/:id" element={<Product/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/message" element={<Message/>}/>
             {
                 !user && <Route path="/login" element={<Login/>}/>
+            }
+            {
+                user && <Route path="/orders" element={<Orders/>}/>
             }
             <Route path="*" element={<Home />}/>
         </Routes>

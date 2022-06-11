@@ -28,11 +28,11 @@ const pass = (data) => {
 
 const handleLogin = (response) => {
     console.log(response.tokenId);
-    alert(response.tokenId);
+    // alert(response.tokenId);
 };
 const handleFailure = (response) => {
     console.log(response);
-    alert(response.error);
+    // alert(response.error);
 };
 const logout = () => {
     alert("success logout");
@@ -150,15 +150,15 @@ const Login = () => {
                                     {/*    </button>*/}
                                     {/*</a>*/}
 
-                                    {/*<GoogleLogin*/}
-                                    {/*    clientId={client_id}*/}
-                                    {/*    buttonText="SIGN IN WITH GOOGLE"*/}
-                                    {/*    onSuccess={handleLogin}*/}
-                                    {/*    onFailure={handleFailure}*/}
-                                    {/*    cookiePolicy={'single_host_origin'}*/}
-                                    {/*    // redirectUri="/"*/}
-                                    {/*    disabled={false}*/}
-                                    {/*></GoogleLogin>*/}
+                                    <GoogleLogin
+                                        clientId={client_id}
+                                        buttonText="SIGN IN WITH GOOGLE"
+                                        onSuccess={handleLogin}
+                                        onFailure={handleFailure}
+                                        cookiePolicy={'single_host_origin'}
+                                        // redirectUri="/"
+                                        disabled={false}
+                                    ></GoogleLogin>
                                     {/*<GoogleLogout*/}
                                     {/*    clientId={client_id}*/}
                                     {/*    buttonText="Logout"*/}

@@ -81,9 +81,7 @@ const NavbarMain = () => {
                             <Nav.Link href="/" className="mx-5 m-2">Home</Nav.Link>
                             <Nav.Link href="/products" className="mx-5 m-2">Products</Nav.Link>
                             <Nav.Link href="/pets" className="mx-5 m-2">Pets</Nav.Link>
-                            <Nav.Link href="/orders" className="mx-5 m-2" disabled>Orders</Nav.Link>
-
-
+                            <Nav.Link href="/orders" className="mx-5 m-2">Orders</Nav.Link>
                         </Nav>
                         <div className="navbar-nav buttons flex-row justify-content-around">
                             {
