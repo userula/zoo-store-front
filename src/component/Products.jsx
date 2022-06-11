@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addProduct} from "../redux/cartSlice";
 import {api_link} from "../index";
 import "react-toastify/dist/ReactToastify.css";
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 
 // toast.configure()
@@ -78,11 +78,13 @@ const Products = () => {
 
     const handleClick = (pr) => {
         if (isExist(pr)) {
-            toast("Already ADDED to cart!", {type: "warning"});
-            // alert("Already ADDED to cart!");
+            // toast("Already ADDED to cart!", {type: "warning"});
+            // <ToastContainer />
+            alert("Already ADDED to cart!");
         } else {
-            // alert('Added!');
-            toast("Added!", {type: 'success'});
+            alert('Added!');
+            // toast("Added!", {type: 'success'});
+            // <ToastContainer />
             dispatch(addProduct({...pr, quantity}));
         }
     }
