@@ -5,6 +5,8 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import {addProduct} from "../redux/cartSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {api_link} from "../index";
+import {Card, ListGroup, ListGroupItem} from "react-bootstrap";
 
 
 const Product = () => {
@@ -23,13 +25,12 @@ const Product = () => {
             setLoading(true);
             const response = await fetch(`https://api-zoo-app.herokuapp.com/api/v1/product/${id}`);
             let pr = await response.json();
-            if(!pr.id){
+            if (!pr.id) {
                 // alert(!pr.id);
                 const response2 = await fetch(`https://api-zoo-app.herokuapp.com/api/v1/clothes/${id}`);
                 let cl = await response2.json();
                 setProduct(cl);
-            }
-            else{
+            } else {
                 setProduct(pr);
             }
             setLoading(false);
@@ -62,10 +63,9 @@ const Product = () => {
         return pr.id === current_pr.id;
     });
     const handleClick = (pr) => {
-        if(isExist(pr)){
+        if (isExist(pr)) {
             alert("Already ADDED to cart!");
-        }
-        else {
+        } else {
             alert('Added!');
             dispatch(addProduct({...pr, quantity}));
         }
@@ -83,10 +83,51 @@ const Product = () => {
                     <p className="lead">{product.description}</p>
                 </div>
                 <div className="justify-content-end text-lg-center mx-lg-5">
-                    <button className="btn btn-outline-primary" onClick={()=>handleClick(product)}>Add to cart</button>
+                    <button className="btn btn-outline-primary" onClick={() => handleClick(product)}>Add to cart
+                    </button>
                 </div>
             </>
         )
+    }
+
+    const ShowComments = () => {
+        const [comm, setComm] = useState([]);
+
+        const getComments = async () => {
+            const comment = await fetch(`${api_link}/comment/${[product.id || product.productId]}`)
+            setComm(await comment.json());
+        };
+
+        useEffect(() => {
+            getComments().then(r => {})
+        });
+        return (
+            <>
+                <div className="mt-lg-5 m-auto w-75">
+                    <h3>Comments</h3>
+
+                    {
+                        comm.map((c)=>{
+                            return (
+                                <>
+                                    <Card style={{ width: '18rem' }} className="m-5">
+                                        <Card.Body>
+                                            <Card.Title>Anonymous</Card.Title>
+                                            <Card.Text>
+                                                {c.text}
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <ListGroup className="list-group-flush">
+                                            <ListGroupItem>{c.star} points</ListGroupItem>
+                                        </ListGroup>
+                                    </Card>
+                                </>
+                            );
+                        })
+                    }
+                </div>
+            </>
+        );
     }
 
     return (
@@ -94,7 +135,7 @@ const Product = () => {
             <div className="container mt-xxl-5 min-vh-100 showPage">
                 <div className="row">
                     {loading ? <Loading/> : <ShowProduct/>}
-
+                    {loading ? <Loading/> : <ShowComments/>}
                 </div>
 
             </div>
