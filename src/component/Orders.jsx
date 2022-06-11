@@ -8,13 +8,13 @@ import {useHttp} from "../hooks/http.hook";
 const Orders = () => {
     const {getOrders} = useHttp();
     const user = useSelector((state) => state.user.currentUser);
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     useEffect(()=> {
-        // getOrd().then(r => )
+        getOrd().then(r => {})
     });
     const getOrd = async () => {
         let resp = await getOrders(`${api_link}/order`, 'GET', null, {"Authorization": "Bearer " + user.token})
-
+        setData(resp);
     }
 
 
@@ -26,22 +26,28 @@ const Orders = () => {
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Order</th>
+                            <th>User</th>
                             <th>Total</th>
                             <th>Date of Payment</th>
                             <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                        <tr>
-                            <td>1</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
-
+                        {
+                            data.map((ord)=>{
+                                return(
+                                    <>
+                                        <tr>
+                                            <td>{ord.orderId}</td>
+                                            <td>{user.email}</td>
+                                            <td>{ord.total}</td>
+                                            <td>{ord.dateOfPayment}</td>
+                                            <td>{ord.status}</td>
+                                        </tr>
+                                    </>
+                                );
+                            })
+                        }
                         </tbody>
                     </Table>
                 </div>

@@ -79,9 +79,9 @@ const Pets = () => {
                     <button className="btn btn-outline-info me-2 col-md-1" id="btn0" onClick={() => setFilter(data)}>All</button>
                     <button className="btn btn-outline-dark me-2 col-md-1" id="btn2" onClick={() => filterProduct(2)}>Cats
                     </button><button className="btn btn-outline-dark me-2 col-md-1" id="btn1" onClick={() => filterProduct(1)}>Dogs
-                </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(5)}>Birds
-                    </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(8)}>Fish
-                    </button><button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(6)}>Rodents
+                </button><button className="btn btn-outline-dark me-2 col-md-1" onClick={() => filterProduct(5)}>Birds
+                    </button><button className="btn btn-outline-dark me-2 col-md-1" onClick={() => filterProduct(8)}>Fish
+                    </button><button className="btn btn-outline-dark me-2 col-md-1" onClick={() => filterProduct(6)}>Rodents
                     </button>
 
                 </div>

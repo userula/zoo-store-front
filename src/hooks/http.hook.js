@@ -127,7 +127,7 @@ export const useHttp = () => {
                 headers['Content-Type'] = 'application/json';
             }
             const resp = await fetch(url, {method, body, headers});
-            return await resp[0].json();
+            return await resp.json();
         }
         catch (e){
 
