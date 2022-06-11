@@ -99,6 +99,9 @@ const Products = () => {
                     <button className="btn btn-outline-dark m-2 col-md-1"
                             onClick={() => filterProduct(4)}>Accessories
                     </button>
+                    <button className="btn btn-outline-dark m-2 col-md-1"
+                            onClick={() => filterProduct(7)}>Treats
+                    </button>
                     <button className="btn btn-outline-dark m-2 col-md-1" onClick={() => filterProduct(3)}>Clothes
                     </button>
                     <button className="btn btn-outline-dark m-2 col-md-1"
