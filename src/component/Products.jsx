@@ -114,7 +114,7 @@ const Products = () => {
                         <>
                             <div className="col-md-3 product">
                                 <div className="card h-100 text-center p-4 border-0 subproduct" key={product.id}>
-                                    <NavLink to={`/product/${product.productId}`} className="text-decoration-none">
+                                    <NavLink to={`/product/${product.productId || product.id}`} className="text-decoration-none">
                                         <img src={product.image} className="card-img-top"
                                              alt={product.name} height="250px"/>
                                         <div className="card-body">
